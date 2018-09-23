@@ -1,0 +1,107 @@
+Clean cache through expression : ---http://serverurl/webservices/cache.asmx
+var sprefix = "*";
+            var skey = "*";
+            var ErrorMessage = CWebService.invokeWS("http://serverurl/webservices/cache.asmx","CleanUpCache",[sprefix,skey],"","","");
+
+Parameter values insertion using XML : Function
+if(type == "insert")
+{
+var formStatusId=CHelper.getEntityAttrib("P_FormStatus","IFormStatusCode","IFormStatusCode = 1");
+xml  = '<?xml version="1.0" encoding="utf-8"?><BizAgiWSParam><Entities><P_CaseData businessKey="ICaseId = '+Me.Case.Id+'">';
+xml += '<SCaseNumber>'+Me.Case.CaseNumber+'</SCaseNumber>';
+xml += '<IMetadataId>'+metadata+'</IMetadataId>';
+xml += '<ICaseId>'+Me.Case.Id+'</ICaseId>';
+xml += '<SProjectTitle>'+projectTitle+'</SProjectTitle>';
+xml += '<IFormStatus>'+formStatusId+'</IFormStatus>';
+xml += '<SProcessName>'+processName+'</SProcessName>';
+xml += '</P_CaseData></Entities></BizAgiWSParam>';
+CHelper.trace("Tool Kit XML", "Case Id"+Me.Case.Id);
+}	
+else if(type=="update")
+{
+xml = '<?xml version="1.0" encoding="utf-8"?><BizAgiWSParam><Entities><P_CaseData businessKey="ICaseId = '+Me.Case.Id+'">';
+xml += '<IFormStatus>'+formStatus+'</IFormStatus>';
+xml += '</P_CaseData></Entities></BizAgiWSParam>';
+}
+return xml;
+
+Deployment Connection String :
+<add key="ConnectionString" value="Data Source=USWAXDDD111,15000;Initial Catalog=SCJBOS;Persist Security Info=True;User ID=bizdevadm;Password=H9Rk3y2c" />
+
+Component library Duplicate record Deletion:
+select * from BABIZAGICATALOG where guidObject in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+select * from BABIZAGICATALOG where guidObjectParent  in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+select * from BATAGVALUE      where taggedObject      in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+-- delete BABIZAGICATALOG where guidObject        in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+-- delete BABIZAGICATALOG where guidObjectParent  in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+-- delete BATAGVALUE      where taggedObject      in('2DC8EC98-6838-4538-97B7-7CF9D6471ABA');
+
+select guidObject from BABIZAGICATALOG where objTypeName = 'BR_ComponentLibrary';
+select * from BABIZAGICATALOG where guidObjectParent  in(select guidObject from BABIZAGICATALOG where objTypeName = 'BR_ComponentLibrary');
+select * from BATAGVALUE      where taggedObject      in(select guidObject from BABIZAGICATALOG where objTypeName = 'BR_ComponentLibrary') order by value;
+
+Sql Queries to to update users data:
+Disable Test and Poc Users with below query:
+update WFUSER set enabled = 0,enabledForAssignation =0,notifByEmail =0 where  fullName  like '%Test%' or fullName like '%poc%'
+Enable Business Users with below Query:
+update WFUSER set contactEmail = REPLACE(contactEmail,'Disabled-','') where
+fullName not like '%Test%' and fullName not like '%poc%' and domain != 'DELETE' and username!='admon';
+fetch users :
+select idUser,count(idUser) from P_User_ADGroups where idP_ADGroups in (select idP_ADGroups from P_ADGroups where SADGroupName in
+('ACL_BOSQA_BZGUG_CLUS','ACL_BOSQA_CLU_USA' ,'ACL_BOSQA_CAT_HS')) group by idUser having count(idUser)=3;--cluster
+
+Manage Values in Production – check box
+If this is enabled that means the values in this Parameter entity won’t go to other environments during the deployment.
+
+SQL Queries:
+delete  from BABIZAGICATALOG where objtype=65 and modifiedbyuser='username'
+
+update WFUSER
+set contactEmail = REPLACE(contactEmail,'Disbaled-','')
+
+
+UPDATE WFUSER SET contactEmail = 'Disbaled-' + contactEmail where fullName not like '%Test%' AND fullName not like '%POC%' AND userName not in ('admon', 'AYadav1', 'AKuma5', 'DSahu') and contactEmail not like 'Disbaled-%' 
+
+
+Me.Case.WorkingCredential.UserProperties["language"] == 17
+
+get entity attrib expression:
+CHelper.getEntityAttrib("P_UserRole","SRoleName","STaskId=' "+taskid+" ' ");
+
+CSS file location:
+D:/Bizagi/Projects/[ProjectName]/webapplication/jquery/overrides/css/desktop/bizagi.styles.css
+
+Process Unlock
+select distinct objType,objName from BABIZAGICATALOG where objType=127;
+select * from BABIZAGICATALOG where objType= 127 and modifiedByUser = 'G304773';
+select * from BABIZAGICATALOG where guidObject= '02A99EBD-FC36-4FFF-B5AA-85FA9D7AAEF2';
+
+select * from BABIZAGICATALOG where objType = 127 and guidObjectParent in
+(select guidObject from BABIZAGICATALOG where objType=16) and modifiedByUser = 'A305964';
+
+use SCJTest;
+--update BABIZAGICATALOG set objContent=0x7B002200690073004C006F0063006B006500640022003A00660061006C00730065002C0022006C006F0063006B00440061007400650022003A00220032003000310037002D00300038002D00320034005400300036003A00300039003A00350038002E0039003800370039003300300034002D00300035003A003000300022002C00220075007300650072004900640022003A0022007600650063006300310031002D006100770064003000300031005F0067006C006F00620061006C005F00670033003000340037003700330022007D00
+where guidObject='02A99EBD-FC36-4FFF-B5AA-85FA9D7AAEF2';
+
+select * from WFCLASS 
+
+select * from BABIZAGICATALOG where objType=16 order by modifiedDate desc;
+
+select * from BABIZAGICATALOG where guidObjectParent ='13E0DD9A-C6C8-41D5-95EC-DDEC23FDF483'
+
+
+BIZAGI Help link references:
+http://feedback.bizagi.com/suite/preview/en/topic/bizagi-11-preview-setting-me-estimatedsolutiondate-does-not-work
+http://www.bizagi.com/en/products/bpm-suite/release-notes-studio
+
+
+http://elearning.bizagi.com/my/automation.php
+
+
+http://help.bizagi.com/bpm-suite/en/index.html?work_reassignment.htm
+
+http://kb.bizagi.com/Knowledgebase/Clean-cache-and-Temporary-folders-in-Bizagi
+
+https://interface.infosys.com/InfosysGlobalAlumni/Login
+
+http://help.bizagi.com/bpmsuite/en/index.html?iterate_over_fact_element.htm
