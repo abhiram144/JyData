@@ -1,0 +1,115 @@
+var managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager>);
+var requestorEmail = <M_ReusableReturnsRequest.entS_ProfileInformation.userName>;
+var requestorRole = null;
+for(var i = 0 ; i < managerList.size() ; i++){
+	var ManagerEmail = null;
+	var actualManager = managerList.get(i).getXPath("SActualManager");
+	var delegateManager = managerList.get(i).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	if(ManagerEmail == requestorEmail.ToLower()){
+		if(managerList.get(i).getXPath("SRole") == "D"){
+			requestorRole = 2;
+		}
+		else if(managerList.get(i).getXPath("SRole") == "M"){
+			requestorRole = 3;
+		}
+		else if(managerList.get(i).getXPath("SRole") == "GM"){
+			requestorRole = 4;
+		}
+		else if(managerList.get(i).getXPath("SRole") == "VP"){
+			requestorRole = 5;
+		}
+		else if(managerList.get(i).getXPath("SRole") == "C"){
+			requestorRole = 6;
+		}
+		else if(managerList.get(i).getXPath("SRole") == "P"){
+			requestorRole = 7;
+		}
+	}
+}
+if(requestorRole == null){
+	requestorRole = 1;
+}
+ManagerEmail = null;
+if(requestorRole < 2){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'D']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(requestorRole < 3 && CHelper.IsNull(ManagerEmail)){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'M']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(requestorRole < 4 && CHelper.IsNull(ManagerEmail)){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'GM']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(requestorRole < 5 && CHelper.IsNull(ManagerEmail)){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'VP']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(requestorRole < 6 && CHelper.IsNull(ManagerEmail)){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'C']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(requestorRole < 7 && CHelper.IsNull(ManagerEmail)){
+	managerList = CHelper.GetValueAsCollection(<M_ReusableReturnsRequest.colM_EmployeeManager[SRole = 'P']>);
+	actualManager = managerList.get(0).getXPath("SActualManager");
+	delegateManager = managerList.get(0).getXPath("SDelegateManager");
+	if(!CHelper.IsEmpty(delegateManager) && !CHelper.IsNull(delegateManager)){
+		ManagerEmail = delegateManager;
+	}
+	else if(!CHelper.IsEmpty(actualManager)&& !CHelper.IsNull(actualManager)){
+		ManagerEmail = actualManager;
+	}
+	
+}
+if(!CHelper.IsNull(ManagerEmail)){
+	var userId = CHelper.getEntityAttrib("WFUSER","idUser","userName='"+ ManagerEmail.ToLower() +"'");
+	<M_ReusableReturnsRequest.entS_DMApprover> = userId;
+}
+CHelper.trace("RFI_Managers","DM Role : "+<M_ReusableReturnsRequest.entS_DMApprover.userName>+");
