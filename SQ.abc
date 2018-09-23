@@ -1,0 +1,52 @@
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME='OnlineForms.STC_INHOUSE_TRAININGS';
+select * from EIP.STC_BUSINESS_TRIP_DISTANCE;
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME='OnlineForms.STC_INHOUSE_TRAININGS' and TAG in ('PROFILE', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); 
+
+select * from EIP.STC_ONLINE_FORM_USERS;
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME='OnlineForms.STC_EXT_TRAINING_REQ_NEW';
+
+
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME='OnlineForms.STC_EXT_TRAINING_REQ_NEW'and TAG
+in ('PROFILE','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S');
+
+select * from STC_BPMPROJECT.BABIZAGITABLES ORDER BY TABLENAME ; 
+
+//
+select * from STC_BPMPROJECT.BABIZAGITABLES where TABLENAME LIKE '%RULE%';
+
+select * from STC_BPMPROJECT.BIZRULE WHERE GUIDRULE  LIKE '%393b40d7-e5f7-1d94-e053-073615aca08c%';
+//
+
+select * from STC_BPMPROJECT.BABIZRULEAUDITLOG where NEWVALUE like '%//if(<is-null(%'
+
+select * from STC_BPMPROJECT.BABIZAGITABLES where TABLENAME LIKE '%LANGUAGE%';
+
+select * from STC_BPMPROJECT.WFUSER 
+
+select * from STC_BPMPROJECT.LGLANGUAGE WHERE IDLGLANGUAGE = '17'
+
+select * from eip.stc_options where OPTION_ID like 'STC_INHOUSE_TRAININGS%';
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME like '%OnlineForms.SMS_Notification%'
+
+select * from EIP.STC_INHOUSE_TRAININGS
+
+select * from EIP.STC_INHOUSE_TRAININGS order by creation_date desc
+
+Yasir Mansour Ali Asiry - ???? ????? ??? ??????? ?????
+
+select * from EIP.CREATE_USER_CUC;
+
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME like '%OnlineForms.SMS_Notification%' and tag = 'INT.DELEGATE';
+
+select * from EIP.STC_ONLINE_FORM_USERS where FORM_ID = 'SAC' AND STATIC_USER = 'TRAINING_EMP';
+
+
+select * from EIP.STC_APPLICATION_RESOURCES where PAGE_NAME='OnlineForms.STC_INHOUSE_TRAININGS' and TAG = 'CLASS_VACANT';
+
+?? ???? ??????? ???????? ?????? ???????? ??? ?? ??? ????
